@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "
+http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lening.mapper.StudentMapper">
+    <!-- 查询全部学生信息 -->
+    <select id="getAllStu" resultType="StudentBean">
+        SELECT * FROM student
+    </select>
+    <!--- 删除学生信息 -->
+    <delete id="delStuById">
+        DELETE FROM student WHERE id=#{id}
+    </delete>
+    <!--- 根据学生姓名和年龄模糊查询 -->
+    <select id="getAllStuAndAge ">
+        SELECT * FROM student
+        <where>
+            <if test="name !=null and name !=''">
+                and name LIKE CONCAT("%",#{name},"%")
+            </if>
+            <if test="age !=null">
+                and age &gt;=#{age}
+            </if>
+            <if test="eage !=null">
+                and age &lt;=#{eage}
+            </if>
+        </where>
+    </select>
+</mapper>
